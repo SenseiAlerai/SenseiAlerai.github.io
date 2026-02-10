@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine?</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  h1 {
+    color: #b30047;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  img {
+    width: 220px;
+    height: auto;
+    margin: 15px;
+    display: none;
+    border-radius: 12px;
+  }
+
+  button {
+    padding: 15px 35px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  #yes {
+    background: #ff3366;
+    color: white;
+  }
+
+  #no {
+    background: #555;
+    color: white;
+    position: absolute;
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+</style>
+</head>
+
+<body>
+
+<h1 id="text">Will you be my Valentine, Dichen? 💖</h1>
+
+<img id="gif" src="" alt="dramatic gif">
+
+<div>
+  <button id="yes">Yes ❤️</button>
+  <button id="no">No ❌</button>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const text = document.getElementById("text");
+  const gif = document.getElementById("gif");
+
+  let count = 0;
+
+  const messages = [
+    "Wait… what? 🥺",
+    "Ouch… that hurt 💔",
+    "Are you really sure? 😢",
+    "This is getting painful 😭",
+    "Okay now I’m crying 😭💘",
+    "NO is not an option 😤"
+  ];
+
+  const gifs = [
+    "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif",       // sad puppy
+    "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif",      // crying
+    "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif",      // heartbreak
+    "https://media.giphy.com/media/3o6wrvdHFbwBrUFenu/giphy.gif", // dramatic crying
+    "https://media.giphy.com/media/26ufcVAp3AiJJsrIs/giphy.gif",  // emotional damage
+    "https://media.giphy.com/media/9Y5BbDSkSTiY8/giphy.gif"       // rage cute
+  ];
+
+  noBtn.addEventListener("click", () => {
+    count++;
+
+    // Change text
+    text.textContent = messages[Math.min(count - 1, messages.length - 1)];
+
+    // Show gif
+    gif.src = gifs[Math.min(count - 1, gifs.length - 1)];
+    gif.style.display = "block";
+
+    // Move button randomly
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // Animate button
+    noBtn.style.animation = count < 3 ? "shake 0.4s" : "bounce 0.4s";
+    setTimeout(() => noBtn.style.animation = "", 500);
+  });
+
+  document.getElementById("yes").addEventListener("click", () => {
+    document.body.innerHTML = `
+      <h1 style="font-size:3.5rem;color:#ff004f;">
+        YAYYY 😍💖<br>I knew it!
+      </h1>
+      <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif"
+           style="width:300px;border-radius:12px;">
+    `;
+  });
+</script>
+
+</body>
+</html>
